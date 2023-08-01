@@ -11,7 +11,7 @@ def main():
 
     data = app.get_bluecoins_data()
     data['Date'] = pd.to_datetime(data['Date'], format='%Y-%m-%d %H:%M:%S')
-    data.iloc[::-1]
+    
 
     
     
@@ -39,8 +39,11 @@ def main():
         m = c['Date'].dt.strftime('%B')
 
         new = data.groupby([m], sort=False)['Amount'].sum()
+        avg = new.iloc[::].sum()/len(new)
+        df = pd.DataFrame(new)
+        df.loc['Average'] = avg
 
-        st.table(new)
+        st.table(df)
         pass
 
 
