@@ -41,7 +41,7 @@ def main():
         new = data.groupby([m], sort=False)['Amount'].sum()
         avg = new.iloc[::].sum()/len(new)
         df = pd.DataFrame(new)
-        df.loc['Average'] = avg
+        df.loc[f'Average for {year_filter}'] = avg
 
         st.table(df)
         pass
